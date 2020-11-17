@@ -1,0 +1,20 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "博客",
+  "main": "index.js",
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@fineliving.github.com:fineliving/blog.git"
+  },
+  "author": "liyang",
+  "license": "ISC",
+  "devDependencies": {
+    "vuepress": "^1.7.1",
+    "vuepress-theme-vdoing": "^1.5.1"
+  }
+}
