@@ -1,9 +1,18 @@
 const nav = require('./config/nav.js');
 module.exports = {
-  theme: 'vdoing', // npm主题依赖包
-  // theme: require.resolve('../../theme-vdoing'), // 使用本地主题包，用于深度修改
+  title: "LiYang's blog",
+  description: 'web前端技术博客,简洁至上,专注web前端学习与总结。JavaScript,js,ES6,TypeScript,vue,python,css3,html5,Node,git,github等技术文章。', // 描述,以 <meta> 标签渲染到页面html中
+  // base: '/', // '/<github仓库名>/'， 默认'/'
+  head: [ // 注入到页面<head> 中的标签，格式[tagName, { attrName: attrValue }, innerHTML?]
+    ['link', { rel: 'icon', href: '/img/favicon.ico' }]
+  ],
+  theme: 'vdoing',
+  // theme: require.resolve('../../theme-vdoing'),
   themeConfig: {
     nav,
+    sidebarDepth: 2,
+    logo: '/img/logo.svg', 
+    repo: 'fineliving',
     category: true, // 是否打开分类功能，默认true。 如打开，会做的事情有：1. 自动生成的front matter包含分类字段 2.页面中显示与分类相关的信息和模块 3.自动生成分类页面（在@pages文件夹）。如关闭，则反之。
     tag: true, // 是否打开标签功能，默认true。 如打开，会做的事情有：1. 自动生成的front matter包含标签字段 2.页面中显示与标签相关的信息和模块 3.自动生成标签页面（在@pages文件夹）。如关闭，则反之。
     archive: true,
