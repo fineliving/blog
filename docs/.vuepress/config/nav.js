@@ -21,14 +21,19 @@ module.exports = [
     text: '笔记本',
     link: '/notes/',
     items: [
+      {text: '书籍', items:[
+        {text: '《ES6教程》', link: '/books/es6/'}, 
+        {text: '《JavaScript高级程序设计》', link: '/books/professionalJs/'}, 
+      ]},
       {text: '教程', items: [
         {text: 'CSS3(技术胖)', link: '/course/css3-jspang/'}, 
         {text: 'ES6(技术胖)', link: '/course/es6-jspang/'}, 
         {text: '性能(Google Developers)', link: '/course/performance/'}, 
       ]},
-      {text: '书籍', items:[
-        {text: '《ES6教程》', link: '/books/es6/'}, 
-        {text: '《JavaScript高级程序设计》', link: '/books/professionalJs/'}, 
+      {text: '技术文档', items: [
+        {text: 'CSS3(技术胖)', link: '/course/css3-jspang/'}, 
+        {text: 'ES6(技术胖)', link: '/course/es6-jspang/'}, 
+        {text: '性能(Google Developers)', link: '/course/performance/'}, 
       ]}
     ]
   },
