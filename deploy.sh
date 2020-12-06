@@ -19,11 +19,11 @@ else
   githubUrl=https://${GITHUB_TOKEN}@github.com/coalyer/blog.git
   git config --global user.name "coalyer"
   git config --global user.email "liyang_qifengle@126.com"
-# fi
-# git init
-# git add -A
-# git commit -m "${msg}"
-# git push -f $githubUrl master:gh-pages # 推送到github
+fi
+git init
+git add -A
+git commit -m "${msg}"
+git push -f $githubUrl master:gh-pages # 推送到github
 
 # deploy to coding
 # echo 'www.xugaoyi.com\nxugaoyi.com' > CNAME  # 自定义域名
