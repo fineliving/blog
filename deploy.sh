@@ -37,7 +37,7 @@ git push -f $githubUrl master:gh-pages # 推送到github
 if [ -z "$CODING_TOKEN" ]; then  # -z 字符串 长度为0则为true；$CODING_TOKEN来自于github仓库`Settings/Secrets`设置的私密环境变量
   codingUrl=git@e.coding.net:coalyer/blog/blog.git
 else
-  codingUrl=https://pt76z1xoupg5:378cea9280c70be4e3d76f7195c71e75d05f8a5e@e.coding.net/coalyer/blog/blog.git
+  codingUrl=https://8d335b4610a42f886349f5e268218eb2e3924380@e.coding.net/coalyer/blog/blog.git
 fi
 git commit -m "${msg}"
 git push -f $codingUrl master # 推送到coding
