@@ -28,8 +28,9 @@ cd docs/.vuepress/dist
 if [ -z "$CODING_TOKEN" ]; then  # -z 字符串 长度为0则为true；$CODING_TOKEN来自于github仓库`Settings/Secrets`设置的私密环境变量
   codingUrl=git@e.coding.net:coalyer/blog/blog.git
 else
+  msg='来自github actions的自动部署'
   codingUrl=https://MVOiLIZOlX:${CODING_TOKEN}@e.coding.net/coalyer/blog/blog.git
-    git config --global user.name "coalyer"
+  git config --global user.name "coalyer"
   git config --global user.email "liyang_qifengle@126.com"
 fi
 git init
