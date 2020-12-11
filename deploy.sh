@@ -29,7 +29,10 @@ if [ -z "$CODING_TOKEN" ]; then  # -z 字符串 长度为0则为true；$CODING_T
   codingUrl=git@e.coding.net:coalyer/blog/blog.git
 else
   codingUrl=https://MVOiLIZOlX:${CODING_TOKEN}@e.coding.net/coalyer/blog/blog.git
+    git config --global user.name "coalyer"
+  git config --global user.email "liyang_qifengle@126.com"
 fi
+git init
 git add -A
 git commit -m "${msg}"
 git push -f $codingUrl master # 推送到coding
