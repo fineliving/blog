@@ -14,7 +14,7 @@ if [ -z "$GITHUB_TOKEN" ]; then
   githubUrl=git@github.com:coalyer/blog.git
 else
   msg='来自github actions的自动部署'
-  githubUrl=https://coalyer:${GITHUB_TOKEN}@github.com/coalyer/blog.git
+  githubUrl=https://${GITHUB_TOKEN}@github.com/coalyer/blog.git
   git config --global user.name "coalyer"
   git config --global user.email "liyang_qifengle@126.com"
 fi
