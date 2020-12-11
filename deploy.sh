@@ -32,8 +32,8 @@ if [ -z "$CODING_TOKEN" ]; then  # -z 字符串 长度为0则为true；$CODING_T
 else
   codingUrl=https://MVOiLIZOlX:${CODING_TOKEN}@e.coding.net/coalyer/blog/blog.git
 fi
-git add -A
-git commit -m "${msg}"
+# git add -A
+# git commit -m "${msg}"
 git push -f $codingUrl master # 推送到coding
 
 cd - # 退回开始所在目录
