@@ -45,6 +45,16 @@ module.exports = {
       createYear: 2019, // 博客创建年份
       copyrightInfo: 'Evan Xu | MIT License', // 博客版权信息，支持a标签
     }
-
- }
+  },
+  plugins: [ // 插件
+    // ['run',{
+    [require('../../vuepress-plugin-run-sfc/index'), { // TODO: 使用本地的vue组件
+        // jsLabs: ['https://unpkg.com/element-ui/lib/index.js'],
+        // cssLabs: ['https://unpkg.com/element-ui/lib/theme-chalk/index.css'],
+        // reverse: false,
+        // isHideHeader: true,
+        themeColor: 'red'
+      },
+    ]
+  ]
 }
