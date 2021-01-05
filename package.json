@@ -19,6 +19,5 @@
     "vue-run-sfc": "^1.6.0",
     "vuepress": "^1.7.1",
     "vuepress-theme-vdoing": "^1.5.1"
-  },
-  "dependencies": {}
+  }
 }
