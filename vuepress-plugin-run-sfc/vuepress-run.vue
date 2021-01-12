@@ -14,15 +14,13 @@ export default {
   mounted () {
     this.add()
   },
-  methods:{
-    add(){
+  methods: {
+    add () {
       // import('vue-run-sfc/src/vue-run-sfc').then(module => { 
       import('../vue-run-sfc/vue-run-sfc').then(module => { // 插件有BUG，所以使用本地的
-      this.$attrs.themeColor = '#11A8CD'  //  TODO:改变主题
-      this.dynamicComponent = module.default 
-      // console.log('this.dynamicComponent',this.dynamicComponent)
-      console.log('attrs',this.$attrs)
-    })
+        this.$attrs.themeColor = '#11A8CD'  //  TODO:改变主题
+        this.dynamicComponent = module.default
+      })
     }
   }
 }
