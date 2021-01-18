@@ -15,9 +15,12 @@
   "author": "liyang",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.12.10",
     "markdown-it-container": "^3.0.0",
+    "markdown-it-katex": "^2.0.3",
     "vue-run-sfc": "^1.6.0",
     "vuepress": "^1.7.1",
     "vuepress-theme-vdoing": "^1.5.1"
-  }
+  },
+  "dependencies": {}
 }
