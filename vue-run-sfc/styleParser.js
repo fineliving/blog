@@ -1,7 +1,8 @@
 const url =
-  "https://wfwf9k3tn7.execute-api.us-west-2.amazonaws.com/production/process/";
+  "https://wfwf9k3tn7.execute-api.us-west-2.amazonaws.com/production/process/"
 
-export const getOne = (type, code) =>
+export const getOne = (type, code) => {
+  console.log(code)
   window
     .fetch(url + new Date().getTime() + parseInt(Math.random() * 1000), {
       method: "POST",
@@ -21,7 +22,7 @@ export const getOne = (type, code) =>
     })
     .then(res => res.json())
     .then(
-      function(data) {
+      function (data) {
         if (data.success) {
           if (data.payload.css.errors && data.payload.css.errors.length) {
             return {
@@ -29,27 +30,28 @@ export const getOne = (type, code) =>
               error: data.payload.css.errors
                 .map(item => item.message)
                 .join("\n")
-            };
+            }
           } else {
             return {
               success: true,
               style: data.payload.css.textOutput
-            };
+            }
           }
         } else {
           return {
             success: false,
             error: data.errors.map(item => item.message).join("\n")
-          };
+          }
         }
       },
-      function(error) {
+      function (error) {
         return Promise.resolve({
           success: false,
           error: error.message
-        });
+        })
       }
-    );
+    )
+}
 
 export const getStyles = styles => {
   styles = styles.map(item => {
@@ -57,16 +59,16 @@ export const getStyles = styles => {
       return Promise.resolve({
         success: true,
         style: item.content
-      });
+      })
     } else if (["scss", "sass", "less", "stylus"].includes(item.lang)) {
-      return getOne(item.lang, item.content);
+      return getOne(item.lang, item.content)
     } else {
       return Promise.resolve({
         success: false,
         error: ""
-      });
+      })
     }
-  });
+  })
 
-  return Promise.all(styles);
-};
+  return Promise.all(styles)
+}

@@ -1,4 +1,6 @@
 const nav = require('./config/nav.js')
+const a = require('babel-polyfill')
+console.log(a)
 module.exports = {
   title: "LiYang's blog",
   description: 'web前端技术博客,简洁至上,专注web前端学习与总结。JavaScript,js,ES6,TypeScript,vue,python,css3,html5,Node,git,github等技术文章。', // 描述,以 <meta> 标签渲染到页面html中
@@ -57,8 +59,8 @@ module.exports = {
   plugins: [ // 插件
     // ['run',{
     [require('../../vuepress-plugin-run-sfc/index'), { // TODO: 使用本地的vue组件
-      // jsLabs: ['https://unpkg.com/element-ui/lib/index.js'],
-      // cssLabs: ['https://unpkg.com/element-ui/lib/theme-chalk/index.css'],
+      jsLabs: ['https://unpkg.com/element-ui/lib/index.js'],
+      cssLabs: ['https://unpkg.com/element-ui/lib/theme-chalk/index.css'],
       // reverse: false,
       // isHideHeader: true,
       themeColor: 'red'
