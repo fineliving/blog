@@ -67,17 +67,17 @@
 </template>
 
 <script>
-import { codemirror, codemirrorOption } from "./codemirror";
-import VueRunSfcPreview from "./components/vue-run-sfc-preview";
-import VueRunSfcHeader from "./components/vue-run-sfc-header";
-import VueRunSfcControl from "./components/vue-run-sfc-control";
-import VueRunSfcMain from "./components/vue-run-sfc-main";
-import cssVars from "css-vars-ponyfill";
+import { codemirror, codemirrorOption } from "./codemirror"
+import VueRunSfcPreview from "./components/vue-run-sfc-preview"
+import VueRunSfcHeader from "./components/vue-run-sfc-header"
+import VueRunSfcControl from "./components/vue-run-sfc-control"
+import VueRunSfcMain from "./components/vue-run-sfc-main"
+import cssVars from "css-vars-ponyfill"
 
-const { debounce } = require("throttle-debounce");
-const compiler = require("vue-template-compiler");
-const screenfull = require("screenfull");
-const Babel = require("@babel/standalone");
+const { debounce } = require("throttle-debounce")
+const compiler = require("vue-template-compiler")
+const screenfull = require("screenfull")
+const Babel = require("@babel/standalone")
 
 export default {
   name: "vue-run-sfc",
@@ -184,7 +184,7 @@ export default {
       default: undefined
     }
   },
-  data() {
+  data () {
     return {
       // 当hover时
       hovering: false,
@@ -204,212 +204,212 @@ export default {
       previewHeight: 0,
       // 布局
       isRow: null
-    };
+    }
   },
   computed: {
     // 全局属性配置和自定义属性配置
-    attrs() {
-      const globalProps = this.$_vue_run_sfc || {};
+    attrs () {
+      const globalProps = this.$_vue_run_sfc || {}
       const merge = key => {
-        let globalVal = globalProps[key] || [];
+        let globalVal = globalProps[key] || []
         if (globalVal && !Array.isArray(globalVal)) {
-          globalVal = [globalVal];
+          globalVal = [globalVal]
         }
-        let customVal = this.$props[key] || [];
+        let customVal = this.$props[key] || []
         if (customVal && !Array.isArray(customVal)) {
-          customVal = [customVal];
+          customVal = [customVal]
         }
-        return [...globalVal, ...customVal];
-      };
+        return [...globalVal, ...customVal]
+      }
 
       const props = Object.keys(this.$props).reduce((acc, key) => {
         if (this.$props[key] !== undefined) {
-          acc[key] = this.$props[key];
+          acc[key] = this.$props[key]
         }
-        return acc;
-      }, {});
+        return acc
+      }, {})
 
       return Object.assign({}, globalProps, props, {
-        jsLabs: merge("jsLabs"),
+        jsLabs: ['https://unpkg.com/element-ui/lib/index.js', 'https://unpkg.com/babel-polyfill@6.26.0/dist/polyfill.min.js'],// 由于Babel 默认只转码 ES6 的新语法（syntax），而不转换新的 API，报错：Uncaught ReferenceError: regeneratorRuntime is not defined，暂时弃用 merge("jsLabs"),
         cssLabs: merge("cssLabs"),
         js: merge("js"),
         css: merge("css")
-      });
+      })
     },
     // 编辑器高度, 动态计算
-    editorHeight() {
+    editorHeight () {
       if (this.isScreenfull) {
         if (this.isRow) {
-          const headerHeight = 58;
-          return document.documentElement.clientHeight - headerHeight + "px";
+          const headerHeight = 58
+          return document.documentElement.clientHeight - headerHeight + "px"
         } else {
-          return null;
+          return null
         }
       } else {
         if (!this.attrs.height) {
-          let editorHeight = 0;
-          const minHeight = 150; // 最小高度
+          let editorHeight = 0
+          const minHeight = 150 // 最小高度
 
           if (this.isRow) {
             // 如果是并排, 则根据预览区的高度 或者 最小高度
             editorHeight =
-              this.previewHeight > minHeight ? this.previewHeight : minHeight;
+              this.previewHeight > minHeight ? this.previewHeight : minHeight
           } else {
             // 如果是column布局, 则按照本身的高度 或者 最小高度
             // 行高
-            const lineHeight = 21;
+            const lineHeight = 21
             // 额外高度
-            const extraHeight = 20;
+            const extraHeight = 20
 
             // 编辑区高度
             editorHeight =
               this.editCode.split(/\r\n|\r|\n/).length * lineHeight +
-              extraHeight;
+              extraHeight
             // 判断
-            editorHeight = editorHeight > minHeight ? editorHeight : minHeight;
+            editorHeight = editorHeight > minHeight ? editorHeight : minHeight
           }
-          return editorHeight + "px";
+          return editorHeight + "px"
         } else {
-          return this.attrs.height;
+          return this.attrs.height
         }
       }
     }
   },
   methods: {
     // 全屏 (点击按钮)
-    handleScreenfull() {
-      this.isScreenfull = !this.isScreenfull;
-      screenfull.toggle(this.$refs.wrapper);
+    handleScreenfull () {
+      this.isScreenfull = !this.isScreenfull
+      screenfull.toggle(this.$refs.wrapper)
     },
     // esc 按钮退出全屏
-    checkScreenfull() {
+    checkScreenfull () {
       if (screenfull.isEnabled) {
         screenfull.on("change", () => {
-          this.isScreenfull = screenfull.isFullscreen;
-        });
+          this.isScreenfull = screenfull.isFullscreen
+        })
       }
     },
     // 运行代码
     // 参考: https://github.com/QingWei-Li/vuep.run/blob/master/src/components/preview.vue
-    handleRun() {
+    handleRun () {
       if (!this.runCode) {
         this.runCode = debounce(300, async () => {
-          const code = this.editCode;
-          this.$emit("input", code);
-          this.$emit("change", code);
+          const code = this.editCode
+          this.$emit("input", code)
+          this.$emit("change", code)
           if (!code) {
-            return;
+            return
           }
 
           let { template, script, styles, errors } = compiler.parseComponent(
             code
-          );
+          )
 
           // 判断是否有错误
           if (errors && errors.length) {
             this.preview = {
               errors: errors
-            };
+            }
           } else {
             // 如果 html和js 都不存在
-            if (!template && !script) return;
+            if (!template && !script) return
             // 处理 css 样式(数组)
             if (window.fetch) {
               // 如果存在则从远程获取解析值
-              const styleParser = require("./styleParser");
-              const res = await styleParser.getStyles(styles);
+              const styleParser = require("./styleParser")
+              const res = await styleParser.getStyles(styles)
               errors = res
                 .filter(item => !item.success)
-                .map(item => item.error);
-              styles = res.filter(item => item.success).map(item => item.style);
+                .map(item => item.error)
+              styles = res.filter(item => item.success).map(item => item.style)
             } else {
               // 如果不存在 window.fetch 则不考虑其它预处理器
               errors = styles
                 .filter(item => item.lang)
-                .map(item => `暂不支持${item.lang}预处理器`);
+                .map(item => `暂不支持${item.lang}预处理器`)
               styles = styles
                 .filter(item => !item.lang)
-                .map(item => item.content);
+                .map(item => item.content)
             }
             // 处理 template
-            template = template ? JSON.stringify(template.content) : '""';
+            template = template ? JSON.stringify(template.content) : '""'
 
             // 处理 js
             script =
               script && script.content.trim()
                 ? script.content.trim()
-                : "export default {}";
+                : "export default {}"
 
             // 转码
             try {
               script = Babel.transform(script, {
                 presets: ["es2015"]
-              }).code;
+              }).code
 
               this.preview = {
                 styles: styles,
                 script: script,
                 template: template,
                 errors: errors
-              };
+              }
             } catch (error) {
               this.preview = {
                 errors: [error.stack]
-              };
+              }
             }
           }
-        });
+        })
       }
-      this.runCode();
+      this.runCode()
     },
     // 重置代码
-    handleReset() {
-      this.editCode = this.initalCode;
-      this.handleRun();
+    handleReset () {
+      this.editCode = this.initalCode
+      this.handleRun()
     },
     // 设置默认 row的 值
-    setDefaultRow() {
+    setDefaultRow () {
       if (this.attrs.row !== undefined) {
-        this.isRow = this.attrs.row;
+        this.isRow = this.attrs.row
       } else {
         // 根据宽度, 响应式处理
         const setWidth = setInterval(() => {
           if (this.$refs.wrapper) {
-            const width = this.$refs.wrapper.clientWidth;
-            this.isRow = width > 992;
+            const width = this.$refs.wrapper.clientWidth
+            this.isRow = width > 992
 
-            clearInterval(setWidth);
+            clearInterval(setWidth)
           }
-        }, 500);
+        }, 500)
       }
     },
-    handlePreviewHeightChange(height) {
-      this.previewHeight = height;
+    handlePreviewHeightChange (height) {
+      this.previewHeight = height
     },
-    init() {
-      this.setDefaultRow();
+    init () {
+      this.setDefaultRow()
 
       // 默认是否展开
-      this.isExpanded = this.attrs.open;
+      this.isExpanded = this.attrs.open
 
       cssVars({
         variables: {
           "--vue-run-sfc-main": this.attrs.themeColor || "#409eff",
           "--vue-run-sfc-border": this.attrs.themeBorderColor || "#eaeefb"
         }
-      });
+      })
 
       // 默认code
-      let initalCode = this.code || this.value;
-      initalCode = initalCode ? decodeURIComponent(initalCode) : "";
-      this.initalCode = initalCode;
-      this.editCode = initalCode;
+      let initalCode = this.code || this.value
+      initalCode = initalCode ? decodeURIComponent(initalCode) : ""
+      this.initalCode = initalCode
+      this.editCode = initalCode
     }
   },
-  mounted() {
-    this.checkScreenfull();
-    this.init();
-    this.handleRun();
+  mounted () {
+    this.checkScreenfull()
+    this.init()
+    this.handleRun()
   }
 };
 </script>
