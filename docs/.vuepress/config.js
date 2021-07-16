@@ -24,7 +24,7 @@ module.exports = {
     category: true, // 是否打开分类功能，默认true。 如打开，会做的事情有：1. 自动生成的front matter包含分类字段 2.页面中显示与分类相关的信息和模块 3.自动生成分类页面（在@pages文件夹）。如关闭，则反之。
     tag: true, // 是否打开标签功能，默认true。 如打开，会做的事情有：1. 自动生成的front matter包含标签字段 2.页面中显示与标签相关的信息和模块 3.自动生成标签页面（在@pages文件夹）。如关闭，则反之。
     archive: true,
-    sidebar: { mode: 'structuring', collapsable: false },// collapsable设置侧边栏不收缩
+    sidebar: { mode: 'structuring', collapsable: true },// collapsable设置侧边栏不收缩
     author: { // 文章默认的作者信息，可在.md文件front matter中单独配置此信息 String | {name: String, link: String}
       name: 'Li Yang', // 必需
       link: 'https://github.com/fineliving' // 可选的
